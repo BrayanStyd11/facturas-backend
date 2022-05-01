@@ -9,8 +9,9 @@
 
 ## Instalación 
 * Ejecutar composer install
-* copiar y pegar el archivo .env.example y cambiarle el nombre a .env
-* Ejecutar el comando php artisan key:generate
+* copiar y pegar el archivo .env.example y cambiarle el nombre a .env y agregar los accesos a la base de datos
+re a .env
+l comando php artisan key:generate
 * Ejecutar el comando php artisan jwt:secret
 * Ejecutar el comando php artisan migrate --seed
 
