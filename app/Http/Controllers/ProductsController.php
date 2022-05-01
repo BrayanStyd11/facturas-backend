@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Products;
 use Illuminate\Http\Request;
+use Auth;
 
 class ProductsController extends Controller
 {
@@ -14,7 +15,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Products::all();
+        $user = Auth::user();
+        $products = Products::where('user_id',$user->id)->get();
         return response()->json(['status'=>200, 'products'=>$products],200);
     }
 
@@ -26,10 +28,12 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
         $product = new Products();
         $product->name = $request->name;
         $product->description = $request->description;
         $product->unit_value = $request->unit_value;
+        $product->user_id = $user->id;
 
         $product->save();
 

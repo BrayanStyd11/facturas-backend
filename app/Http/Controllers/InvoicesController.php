@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Invoices;
 use App\Models\InvoicesProducts;
 use Illuminate\Http\Request;
+use Auth;
 
 class InvoicesController extends Controller
 {
@@ -15,7 +16,8 @@ class InvoicesController extends Controller
      */
     public function index()
     {
-        $invoices = Invoices::with('InvoicesProducts')->orderBy('id','desc')->get();
+        $user = Auth::user();
+        $invoices = Invoices::where('user_id',$user->id)->with('InvoicesProducts')->orderBy('id','desc')->get();
         return response()->json(['status'=>200,'invoices'=>$invoices],200);
     }
 
@@ -27,6 +29,7 @@ class InvoicesController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
         $invoice = new Invoices();
 
         $invoice->date_hourly = $request->date_hourly;
@@ -38,6 +41,7 @@ class InvoicesController extends Controller
         $invoice->IVA = $request->IVA;
         $invoice->total_value = $request->total_value;
         $invoice->quantity = $request->quantity;
+        $invoice->user_id = $user->id;
         $invoice->save();
 
         $invoiceSaved = Invoices::latest('id')->first();

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('IVA');
             $table->integer('total_value');
             $table->integer('quantity');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

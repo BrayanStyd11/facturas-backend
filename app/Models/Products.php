@@ -15,5 +15,6 @@ class Products extends Model
         'name',
         'description',
         'unit_value',
+        'user_id',
     ];
 }

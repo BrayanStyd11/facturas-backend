@@ -21,6 +21,7 @@ class Invoices extends Model
         'IVA',
         'total_value',
         'quantity',
+        'user_id'
     ]; 
 
     public function InvoicesProducts(){
