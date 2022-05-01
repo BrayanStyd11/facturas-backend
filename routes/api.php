@@ -18,7 +18,7 @@ use App\Http\Controllers\InvoicesController;
 */
 
 Auth::routes();
-
+Route::get('logout',[LoginController::class, 'logout']);
 Route::get('refresh',[LoginController::class, 'refresh']);
 
 //Se crea la validación para verificar que las rutas tengan el token para poder seguir con las respectivas rutas

@@ -40,12 +40,11 @@ class InvoicesController extends Controller
         $invoice->quantity = $request->quantity;
         $invoice->save();
 
-        $invoiceSaved = Invoices::latest('id')->first();   
-
-        foreach ($request->products as $key => $product) {
+        $invoiceSaved = Invoices::latest('id')->first();
+        foreach ($request->products as $key => $product) {            
             $invoice_product = new InvoicesProducts();
             $invoice_product->id_invoice = $invoiceSaved->id;
-            $invoice_product->id_product = $product[$key];
+            $invoice_product->id_product = $product['id'];
             $invoice_product->save();
         }
 
@@ -83,18 +82,17 @@ class InvoicesController extends Controller
         $updateInvoice->total_value = $request->total_value;
         $updateInvoice->quantity = $request->quantity;
 
-        $updateInvoice->update();
-
+        $updateInvoice->update();        
         foreach ($request->products as $key => $product) {
-            $invoice_product = InvoicesProducts::where('id_invoice',$id)->where('id_product',$product[$key])->first();
+            $invoice_product = InvoicesProducts::where('id_invoice',$id)->where('id_product',$product['id'])->first();
             if($invoice_product){
                 $invoice_product->id_invoice = $id;
-                $invoice_product->id_product = $product[$key];
+                $invoice_product->id_product = $product['id'];
                 $invoice_product->save();
             }else{
                 $invoice_product = new InvoicesProducts();
                 $invoice_product->id_invoice = $id;
-                $invoice_product->id_product = $product[$key];
+                $invoice_product->id_product = $product['id'];
                 $invoice_product->save();
             }           
         }
