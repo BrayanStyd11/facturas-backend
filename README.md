@@ -7,10 +7,13 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Requisitos
+Php version 8.0.2 o superior
+
 ## Instalación 
-* Ejecutar composer install
 * copiar y pegar el archivo .env.example y cambiarle el nombre a .env y agregar los accesos a la base de datos
 re a .env
+* Ejecutar composer install
 l comando php artisan key:generate
 * Ejecutar el comando php artisan jwt:secret
 * Ejecutar el comando php artisan migrate --seed
